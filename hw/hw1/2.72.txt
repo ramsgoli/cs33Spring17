@@ -1,0 +1,7 @@
+a)
+size_t is always unsigned, since it represents the size of a data structure and it does not make sense for the size to be negative. If one of the operands in an arithmetic expression is unsigned, the entire expression will return an unsigned value. Therefore, the conditional statement is always true.
+
+b) void copy_int(int val; void *buf, int maxbytes) {
+    if (maxbytes >= sizeof(val) )
+        memcpy(buf, (void•) &val, sizeof(val));
+}

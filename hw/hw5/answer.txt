@@ -1,0 +1,16 @@
+12.18
+
+A) Unsafe
+B) Safe
+C) Unsafe
+
+12.24
+
+In general, a function is not reentrant if it doesn't use any shared resources,
+i.e. it doesn't use any shared variables, data, etc.
+The RIO functions all accept a pointer to a buffer to write to as an argument.
+If the user calls these RIO functions and passes in pointers to the same buffer,
+the functions are not considered reentrant. One of the functions could be modifying
+the buffer, but then be interrupted. When execution returns to this function, the buffer
+could be modified by some other process operating on the same buffer. Thus, the functions 
+cannot be considered reentrant.

@@ -1,0 +1,72 @@
+A. stack frame for eval
+
+highest address
+         <---%rbp
+
+
+
+
+
+   z
+         <---%rsp+24
+   &z
+         <---%rsp+16
+   y
+         <---%rsp+8
+   x
+         <---%rsp
+
+lowest address
+
+B.
+
+We see the line "64(%rsp), %rdi" in the assembly code. This is loading the address of the 
+stack pointer into %rdi, which is an argument register. Therefore, eval passes the address
+of the stack pointer to process.
+
+C. 
+
+process uses the stack pointer to set the values of the StrA s. When the function
+process is called in the assembly code for eval, the return address is pushed
+onto the stack, which moves the stack pointer down by 8 bytes. So line 5 "movq 16(%rsp), %rcx"
+allows process to access y. Line 7 "movq 8(%rsp), %rcx" allows process to access x.
+
+D.
+
+%rdi is an address in eval's stack frame that process uses to set the result fields of structure
+r. Lines 6, 8, and 9 set values of %rdi, 8+%rdi, and 16+%rdi. The address of %rdi is loaded into 
+%rax in line 1, so eval can then access the values of struct r.
+
+E.
+
+highest address
+            <---%rbp
+
+        z
+            <---%rsp+88
+        x
+            <---%rsp+80
+        y
+            <---%rsp+72
+
+
+
+        z
+            <---%rsp+24
+        &z
+            <---%rsp+16
+        y
+            <---%rsp+8
+        x
+            <---%rsp
+lowest address
+
+eval can access the elements of structure r by accessing the values of %rsp + 72, 80, and 88
+
+F.
+
+Passing in a structure as an argument into a function copies all its member variables into the stack. 
+When struct member variables are returned, they can be accessed by the calling function by following the stack pointer
+to the various locations where values were stored by the returning function. For example, process modifies values in eval's 
+stack frame to hold the values of the struct, and eval can then access those values by following the stack pointer
+

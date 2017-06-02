@@ -1,0 +1,27 @@
+A)
+(float) x == (float) dx;
+FALSE. When casting an int to a float, rounding errors can occur (since some numbers can never be represented
+with exact precision. Similary, when downcasting a double to a float, rounding errors can occur that can cause the float to
+be misrepresented. Therefore, the comparison between the two floats will not always result in a 1. If x is INT_MAX, then casting 
+x to a float will result in NaN, and comparing NaN to anything results in 0.
+
+B)
+dx - dy == (double) (x-y)
+This statement will not always equal 1. If x is INT_MIN and y is any positive integer, the subtraction (x-y) will underflow, and wrap around to a positive number (since we 
+are compiling with -fwrapv). Therefore, the expression on the right hand side will be totally incorrect, and this comparison cannot be true.
+
+C)
+(dx + dy) + dz == dx + (dy + dz)
+This statement will always equal 1. dx, dy, and dz, are all doubles, which can hold the value of an int without any rounding error. Therefore, 
+changing the order of the addition does not matter, as the associative property holds. The left hand side should always equal the right hand side.
+
+D)
+(dx * dy) * dz == dx * (dy * dz)
+This statement will not always equal 1. If dx and dy are very large numbers, while dz is a very small number, this may produce an inequality.
+Consider dx = 2^30-1, dy = 2^24, dz = 2^-1. The result of dx * dy will be close to 2^54, which is too large to represent in a double. This will result in a rounding error
+because a double can only hold 53 bits of fractional data. But on the right hand side, the result of dy * dz is 2^23, which when multiplied by dx will result in some number
+less than 2^53. This shouldn't have any rounding problem.
+
+E)
+dx/dx == dz/dz
+This statement will not always equal 1. Consider when dx = 0. dx/dx will result in NaN. If dz is non-zero, dz/dz will result in 1. These are not equal.

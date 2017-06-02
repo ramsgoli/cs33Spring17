@@ -1,0 +1,14 @@
+A)
+This will always yield 1 because if x is less than y, than the negative of x must be greater than y
+
+B) 
+This will always yield 1.
+
+C)
+This will always yield 1. The range of the two's complement of a positive number is always 2 to the power w, so in order for ~x+~y to be equl to ~(x+y), 1 has to be added to the left side of the equation.
+
+D)
+This will always yield 1. When signed ints are converted to unsigned ints, the bit representation does not actually change. Therefore, this mathematical equality will still always be true;
+
+E)
+This will always yield 1. When bits are shifted to the right and to the left by the same amount, the msb bits are lost. Thefore, the result will always be less than or equal to the original value

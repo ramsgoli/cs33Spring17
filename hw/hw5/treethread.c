@@ -24,8 +24,7 @@ void * thread(void *params) {
 		printf("Thread %i done\n", arg.tnum);
 		return NULL;
 	} else {
-		struct args ch1args;
-		struct args ch2args;
+		struct args ch1args, ch2args;
 
 		ch1args.tnum = (2 * arg.tnum) + 1;
 		ch2args.tnum = (2 * arg.tnum) + 2;
@@ -33,8 +32,8 @@ void * thread(void *params) {
 		ch1args.layer = threadLayer + 1;
 		ch2args.layer = threadLayer + 1;
 
-		pthread_t tid1;
-		pthread_t tid2;
+		pthread_t tid1, tid2;
+
 		if (pthread_create(&tid1, 0, thread, &ch1args))
 			reportError("cannot create thread");	
 		if (pthread_create(&tid2, 0, thread, &ch2args))
@@ -62,8 +61,7 @@ int main(int argv, char ** argc) {
 		int ch1 = (2 * threadNum) +1;
 		int ch2 = (2 * threadNum) +2;
 
-		struct args ch1args;
-		struct args ch2args;
+		struct args ch1args, ch2args;
 
 		ch1args.tnum = ch1;
 		ch1args.layer = 2;
@@ -71,8 +69,8 @@ int main(int argv, char ** argc) {
 		ch2args.tnum = ch2;
 		ch2args.layer = 2;
 
-		pthread_t tid1;
-		pthread_t tid2;
+		pthread_t tid1, tid2;
+
 		if (pthread_create(&tid1, 0, thread, &ch1args))
 			reportError("cannot create thread");	
 		if (pthread_create(&tid2, 0, thread, &ch2args))

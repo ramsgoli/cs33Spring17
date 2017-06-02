@@ -3,7 +3,8 @@
 #include <math.h>
 #include <pthread.h>
 
-//globals to keep track of num threads
+// parameters passed to each thread
+// need to keep track of threadnum to print, and which layer we are at in the binary tree
 struct args {
 	int tnum;
 	int layer;
@@ -47,7 +48,6 @@ void * thread(void *params) {
 		printf("Thread %i done\n", arg.tnum);;
 		return NULL; 
 	}
-
 }
 
 int main(int argv, char ** argc) {
@@ -58,7 +58,7 @@ int main(int argv, char ** argc) {
     if (numthreads == 0)  // no need to spawn more threads
        printf("Thread %i done\n", threadNum); 
     else {
-		//child thread nums
+		//child thread args
 		int ch1 = (2 * threadNum) +1;
 		int ch2 = (2 * threadNum) +2;
 
@@ -70,7 +70,6 @@ int main(int argv, char ** argc) {
 
 		ch2args.tnum = ch2;
 		ch2args.layer = 2;
-
 
 		pthread_t tid1;
 		pthread_t tid2;
@@ -85,7 +84,6 @@ int main(int argv, char ** argc) {
 			reportError("cannot create thread");	
 
 		printf("Thread %i done\n", threadNum);
-        //do some shit
     }
 
     return(0);
